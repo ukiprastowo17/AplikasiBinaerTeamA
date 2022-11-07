@@ -1,14 +1,13 @@
-package com.binar.aplikasibinaerteama.data.db.datasource
+package com.binar.aplikasibinaerteama.data.room.datasource
 
-import com.binar.aplikasibinaerteama.data.db.dao.MemberDao
-import com.binar.aplikasibinaerteama.data.db.entity.Member
+import com.binar.aplikasibinaerteama.data.room.dao.MemberDao
+import com.binar.aplikasibinaerteama.data.room.entity.Member
 
 
 interface MemberDataSource {
     suspend fun getAllMember(): List<Member>
 
     suspend fun getAllMembersById(id: Int): Member
-
 
     suspend fun insertMember(member: Member): Long
 

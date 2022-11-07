@@ -13,4 +13,87 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <!-- Customize Template -->
+    <!-- Title Logo Layer 1 (Bold) -->
+    <style name="TextTitle.Bold" parent="Theme.AplikasiBinaerTeamA">
+        <item name="android:textColor">@color/blue_1</item>
+        <item name="android:textSize">38sp</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+    </style>
+
+    <!-- Title Logo Layer 2 (Light) -->
+    <style name="TextTitle.Light" parent="Theme.AplikasiBinaerTeamA">
+        <item name="android:textColor">@color/blue_1</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:letterSpacing">0.1</item>
+        <item name="android:fontFamily">@font/poppins_light</item>
+    </style>
+
+    <!-- Title Dialog -->
+    <style name="TextTitleDialog" parent="Theme.AplikasiBinaerTeamA">
+        <item name="android:textColor">@color/blue_1</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+    </style>
+
+    <!-- Title List Member -->
+    <style name="TextTitleListMember" parent="Theme.AplikasiBinaerTeamA">
+        <item name="android:textColor">@color/blue_1</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+    </style>
+
+    <!-- Title Landing Page -->
+    <style name="TextTitleLP" parent="Theme.AplikasiBinaerTeamA">
+        <item name="android:textColor">@color/black_1</item>
+        <item name="android:textSize">34sp</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+    </style>
+
+    <!-- Text Description Light -->
+    <style name="TextDesc.Light" parent="Theme.AplikasiBinaerTeamA">
+        <item name="android:textColor">@color/black_2</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/poppins_light</item>
+    </style>
+
+    <!-- Text Description Regular -->
+    <style name="TextDesc.Reg" parent="Theme.AplikasiBinaerTeamA">
+        <item name="android:textColor">@color/black_2</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <!-- Text Name of Member -->
+    <style name="TextMember" parent="Theme.AplikasiBinaerTeamA">
+        <item name="android:textColor">@color/black_2</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <!-- Button General -->
+    <style name="Button" parent="Theme.AplikasiBinaerTeamA">
+        <item name="android:background">@drawable/rounded_corner</item>
+        <item name="android:paddingStart">40dp</item>
+        <item name="android:paddingEnd">40dp</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- Button Dialog -->
+    <style name="ButtonDialog" parent="Theme.AplikasiBinaerTeamA">
+        <item name="android:background">@drawable/rounded_corner</item>
+        <item name="android:paddingStart">25dp</item>
+        <item name="android:paddingEnd">25dp</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
 </resources>

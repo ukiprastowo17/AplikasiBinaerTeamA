@@ -2,7 +2,8 @@
 <resources>
 
     <string name="app_name">Random Team Gen</string>
-
+    <string name="title_about">About</string>
+    <string name="title_group">Group Maker</string>
     <string name="delete_name">Delete</string>
     <string name="randomize">Randomize</string>
     <string name="preset_options">Preset Options</string>
@@ -36,5 +37,43 @@
     <string name="no">No</string>
 
     <string name="admob_unit_id">YOUR_AD_MOB_UNIT_ID</string>
+
+    <string name="text_previous">Previous</string>
+    <string name="text_next">Next</string>
+    <string name="text_menu">Home</string>
+
+    <string name="text_this_rock">Ini Adalah Batu</string>
+    <string name="desc_rock">Dia Akan Menang Melawan Gunting, Tapi Kalah Melawan Kertas</string>
+    <string name="text_this_paper">Ini Adalah Kertas</string>
+    <string name="desc_paper">Dia Akan Menang Melawan Batu, Tapi Kalah Melawan Gunting</string>
+    <string name="text_this_scissor">Ini Adalah Gunting</string>
+    <string name="desc_scissor">Dia Akan Menang Melawan Kertas, Tapi Kalah Melawan Batu</string>
+
+    <string name="text_group_splash">Group</string>
+    <string name="text_maker_splash">Maker</string>
+
+    <string name="text_active_list_members">Active List members</string>
+    <string name="text_tournament_member">Tournament Member</string>
+    <string name="text_two_members">Two Members</string>
+    <string name="text_group_generator">Group Generator</string>
+    <string name="text_members_management">Members Management</string>
+    <string name="text_member">Member</string>
+    <string name="text_history">History</string>
+    <string name="text_about">About</string>
+
+    <string name="text_group">Group</string>
+    <string name="text_maker">Maker</string>
+
+    <string name="desc_group">Create a groups automatically</string>
+    <string name="text_body">Group Maker is a generator that creates random teams or groups. Through this application can help you to divide the list of names into a team or group. By entering a list of names into the team generator, the team generator will randomize the names you entered earlier. You can also set the number of groups or the number of people in a group that you want to create to produce a randomly evenly distributed group within a group</string>
+
+    <string name="title_sub_about">App</string>
+    <string name="title_about2">Group Maker</string>
+    <string name="title_about3">Simply and Fast</string>
+    <string name="title_sub_about2">Get To Know About Us</string>
+    <string name="title_menu1">About</string>
+    <string name="title_desc_menu1">Description about \nour project</string>
+    <string name="title_menu2">Our Team</string>
+    <string name="title_desc_menu2">Information about \nour team</string>
 
 </resources>

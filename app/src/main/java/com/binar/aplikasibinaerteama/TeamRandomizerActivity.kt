@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.*
 import android.view.View.OnTouchListener
@@ -25,6 +26,10 @@ class TeamRandomizerActivity : Activity(), View.OnClickListener,
     private var updateList: ArrayList<UpdateObj>? = null
 
     private lateinit var binding: TeamrandBinding
+
+    private val playerList: MutableList<String>? by lazy {
+        intent.getStringArrayListExtra("playerArrList")
+    }
 
 
     var isPresetLoaded = false
@@ -191,7 +196,6 @@ class TeamRandomizerActivity : Activity(), View.OnClickListener,
     }
 
     override fun onClick(v: View) {
-
         // TODO Auto-generated method stub
         when (v.id) {
             R.id.add_action_button -> addName()
@@ -291,6 +295,7 @@ class TeamRandomizerActivity : Activity(), View.OnClickListener,
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data)
+        Log.v("dataRequest",requestCode.toString() + "|" + resultCode.toString() + "|"+ data.toString())
         if (resultCode == RESULT_OK) {
             when (requestCode) {
                 1 -> {

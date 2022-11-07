@@ -1,5 +1,6 @@
 package com.binar.aplikasibinaerteama
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Html
 import android.text.TextUtils
@@ -10,8 +11,10 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.marginTop
 import com.binar.aplikasibinaerteama.databinding.RandomizeBinding
 import java.util.*
+import android.graphics.Typeface
 
 class RandomizeActivity : AppCompatActivity() {
     private val ERROR_TAG = "Randomize"
@@ -38,7 +41,6 @@ class RandomizeActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
         initializeViews()
-
         startRandomizeThread()
     }
 
@@ -48,38 +50,39 @@ class RandomizeActivity : AppCompatActivity() {
         binding.bRandomizeAgain.setOnClickListener(View.OnClickListener { startRandomizeThread() })
     }
 
+    @SuppressLint("ResourceAsColor")
     private fun randomize() {
         var team = 0
         var playerNumCounter = 1
         val llTeam = numberOfTeams?.let { arrayOfNulls<LinearLayout>(it) }
+
         llTeam!!.indices.forEach { i ->
             llTeam!![i] = LinearLayout(this)
             llTeam[i]!!.id = i
             llTeam[i]!!.orientation = LinearLayout.VERTICAL
+            llTeam[i]!!.setBackgroundColor(R.color.purple_700)
+            llTeam[i]!!.marginTop
+
             val tvTeamNum = TextView(this)
-            tvTeamNum.text = Html.fromHtml("<u><b>Team " + (i + 1) + "</b></u>")
+            tvTeamNum.text = "TEAM-" + (i + 1).toString()
+            tvTeamNum.setTypeface(null, Typeface.BOLD)
             tvTeamNum.setTextSize(
                 TypedValue.COMPLEX_UNIT_PX,
                 resources.getDimension(R.dimen.rtg_text_size)
             )
             val lp = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
+                LinearLayout.LayoutParams.MATCH_PARENT,
             )
-            lp.gravity = Gravity.CENTER_HORIZONTAL
-            if (i > 1) {
-                lp.topMargin = 50
-            }
+            lp.topMargin = 50
+
+//            if (i > 1) {
+//                lp.topMargin = 50
+//            }
             tvTeamNum.layoutParams = lp
-            if (team == 0) {
                 binding.llTeamLeft.addView(llTeam[i])
                 llTeam[i]!!.addView(tvTeamNum)
                 team = 1
-            } else if (team == 1) {
-                binding.llTeamRight.addView(llTeam[i])
-                llTeam[i]!!.addView(tvTeamNum)
-                team = 0
-            }
         }
         team = 0
 
@@ -87,14 +90,7 @@ class RandomizeActivity : AppCompatActivity() {
         for (i in playerList!!.indices) {
             val playerName = playerList!![i]
             val tvName = TextView(this)
-            tvName.text = (Integer.toString(playerNumCounter) + ". " + playerName).replaceFirst(
-                "\\s".toRegex(),
-                "\u00A0"
-            )
-            tvName.setTextSize(
-                TypedValue.COMPLEX_UNIT_PX,
-                resources.getDimension(R.dimen.rtg_text_size)
-            )
+            tvName.text = (playerNumCounter.toString() + ". " + playerName)
             tvName.setSingleLine()
             tvName.ellipsize = TextUtils.TruncateAt.END
             if (numberOfTeams!! > 3 && i == playerList!!.size - 1 && (team + 1) % 2.0f != 0f) {
@@ -112,7 +108,7 @@ class RandomizeActivity : AppCompatActivity() {
 
 
     private fun startRandomizeThread() {
-        binding.bRandomizeAgain.setVisibility(View.INVISIBLE)
+        binding.bRandomizeAgain.visibility = View.INVISIBLE
         randomizeThread = Thread {
             synchronized(this@RandomizeActivity) {
                 try {
@@ -124,7 +120,6 @@ class RandomizeActivity : AppCompatActivity() {
 
                         this@RandomizeActivity.runOnUiThread(Runnable {
                             binding.llTeamLeft.removeAllViews()
-                            binding.llTeamRight.removeAllViews()
                             randomize()
                         })
                     }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_landpage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/ic_landpage_1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.68" />
+
+    <TextView
+        android:id="@+id/tv_title_landpage"
+        style="@style/TextTitleLP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/gl_guideline"
+        tools:text="Title" />
+
+    <TextView
+        android:id="@+id/tv_desc_landpage"
+        style="@style/TextDesc.Light"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@id/tv_title_landpage"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_landpage"
+        tools:text="Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid eaque magnam necessitatibus officiis porro, possimus veritatis? Dignissimos dolores dolorum in? Beatae distinctio dolores qui. Eligendi et explicabo facere porro reprehenderit rerum ut voluptas. Ad amet, autem consequuntur cumque cupiditate eos eum facilis labore, nemo odit porro quaerat quisquam sit voluptatum?" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

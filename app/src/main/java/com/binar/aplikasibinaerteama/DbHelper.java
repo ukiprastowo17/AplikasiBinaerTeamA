@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DbHelper extends SQLiteOpenHelper{
-	private static final String KEY_ROWID = "_id"; //primary key
+	private static final String KEY_ROWID = "_id";
 	private static final String KEY_PRESET_NAME = "presetName";
 	private static final String KEY_PLAYERS = "players";
 	
-	private static final String DATABASE_NAME = "PresetDB"; //dbname
-	private static final String DATABASE_TABLE = "Presets"; //dbname
+	private static final String DATABASE_NAME = "PresetDB";
+	private static final String DATABASE_TABLE = "Presets";
 	private static final int DATABASE_VERSION = 3;
 	
 	private SQLiteDatabase ourDatabase;
@@ -26,9 +26,8 @@ public class DbHelper extends SQLiteOpenHelper{
 	}
 
 	@Override
-	public void onCreate(SQLiteDatabase db) { //gets called when it gets started. If you want onCreate() to run you need to use adb to delete the SQLite database file.
+	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
-		//setup db
 		db.execSQL( "CREATE TABLE " + DATABASE_TABLE + " (" +
 				KEY_ROWID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
 				KEY_PRESET_NAME + " TEXT NOT NULL, " + 
@@ -36,7 +35,7 @@ public class DbHelper extends SQLiteOpenHelper{
 		);
 	}
 
-	@Override // If you want the onUpgrade() method to be called, you need to increment the version number in your code.
+	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// TODO Auto-generated method stub	
 		db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE);
@@ -52,23 +51,23 @@ public class DbHelper extends SQLiteOpenHelper{
 		Cursor cursor = null;
 		String[] columns = new String[]{KEY_PRESET_NAME};
 		String playerNames = "";
-		
+
 		try{
 		    cursor = ourDatabase.query(DATABASE_TABLE, columns, KEY_PRESET_NAME + " = '" + presetName + "'", null, null, null, null);
 		    if(cursor.getCount() >= 1){
 		    	return false; //table already exists
-		    }		    
+		    }
 		}finally{
             if (cursor != null)
 			    cursor.close();
 		}
-		
+
 		for(String name: playersArrList){ //put all players names in 1 string
 			playerNames += (name + "~"); //delimiter
 		}
-		
+
 		ourDatabase.beginTransaction(); //need to start a transaction for multiple sql statements for faster speeds
-		
+
 		try{
 			ContentValues cv = new ContentValues(); //like a bundle
 			cv.put(KEY_PRESET_NAME, presetName);
@@ -80,10 +79,10 @@ public class DbHelper extends SQLiteOpenHelper{
 		finally{
 			ourDatabase.endTransaction();
 		}
-		
+
 	    return true;
 	}
-	
+
 	public String[] getPresetNames(){
 		String[] presetNames;
 		Cursor c = null;
@@ -108,13 +107,7 @@ public class DbHelper extends SQLiteOpenHelper{
 		c.close();
 		return presetNames;
 		
-		/*try{
-			c = ourDatabase.rawQuery("SELECT name FROM sqlite_master WHERE type='table' "
-					+ "AND name NOT LIKE 'sqlite_%' AND name NOT LIKE 'android_metadata' ORDER BY name", null); //gets name of every table in db?
-			presetNames = new String[c.getCount()];
-		}catch(Exception e){
-			return null;
-		}*/
+
 	}
 	
 	public ArrayList<String> getPlayersByPreset(String presetName){ //this one returns an arrayList so we dont have to convert to one in main
@@ -146,21 +139,21 @@ public class DbHelper extends SQLiteOpenHelper{
 		ContentValues cv = new ContentValues();
         Cursor cursor = null;
 
-		ourDatabase.beginTransaction(); //need to start a transaction for multiple sql statements for faster speeds
+		ourDatabase.beginTransaction();
 		try{
             cursor = ourDatabase.query(DATABASE_TABLE, columns, KEY_PRESET_NAME + " = '" + presetName + "'", null, null, null, null);
 			if(cursor.moveToNext()){
 				playerNamesWDelimiter = cursor.getString(0);
 			}
 			
-			for(UpdateObj up: updateList){ //alter the string
+			for(UpdateObj up: updateList){
 				if(up.getAction().equals("add")){			
 					playerNamesWDelimiter += (up.getPlayerName() + "~");				
 				} else if(up.getAction().equals("delete")){
 					playerNamesWDelimiter = playerNamesWDelimiter.replaceFirst(up.getPlayerName() + "~", "");
 				}
 			}
-			cv.put(KEY_PLAYERS, playerNamesWDelimiter);	//put string back in db
+			cv.put(KEY_PLAYERS, playerNamesWDelimiter);
 			ourDatabase.update(DATABASE_TABLE, cv, KEY_PRESET_NAME + " = '" + presetName + "'", null);
 			
 			ourDatabase.setTransactionSuccessful();

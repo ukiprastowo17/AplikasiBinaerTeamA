@@ -126,7 +126,14 @@ import com.binar.aplikasibinaerteama.dialogs.LoadSavePresetAsDialog
             db.getPlayersByPreset(presetName)
         )
         db.close()
-        setResult(RESULT_OK, data)
+        setResult( RESULT_OK, data)
+
+//        val intent = Intent(this@LoadPreseActivity, TeamRandomizerActivity::class.java)
+//        startActivity(intent)
+
+
+
+
         val t = Toast.makeText(applicationContext, "Preset loaded.", Toast.LENGTH_SHORT)
         t.setGravity(gravityType, 0, yGravity)
         t.show()
