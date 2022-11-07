@@ -1,11 +1,14 @@
 package com.binar.aplikasibinaerteama.ui.about.team
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.binar.aplikasibinaerteama.R
+import com.binar.aplikasibinaerteama.RandomizeActivity
 import com.binar.aplikasibinaerteama.adapter.TeamAdapter
+import com.binar.aplikasibinaerteama.constant.CommonConstant
 import com.binar.aplikasibinaerteama.databinding.ActivityTeamBinding
+import com.binar.aplikasibinaerteama.ui.about.profile.ProfileActivity
 
 
 class TeamActivity : AppCompatActivity() {
@@ -34,8 +37,11 @@ class TeamActivity : AppCompatActivity() {
         supportActionBar?.hide()
         binding.listRecyclerView.apply {
             layoutManager = LinearLayoutManager(this@TeamActivity)
-            adapter = TeamAdapter(teamsApp)
+            adapter = TeamAdapter(teamsApp, this@TeamActivity)
         }
+
+
+
     }
 
 

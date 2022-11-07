@@ -13,4 +13,9 @@ object CommonConstant {
     const val DATABASE_TABLE = "Presets"
     const val PREF_NAME = "PresetPef"
     const val DATABASE_VERSION = 3
+
+    const val EXTRAS_NAME = "EXTRAS_NAME"
+    const val EXTRAS_JOB = "EXTRAS_JOB"
+    const val EXTRAS_DESC = "EXTRAS_DESC"
+    const val EXTRAS_IMG = "EXTRAS_IMG"
 }
