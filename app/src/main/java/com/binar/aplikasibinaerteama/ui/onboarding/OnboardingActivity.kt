@@ -19,8 +19,14 @@ import com.binar.aplikasibinaerteama.ui.main.HomeActivity
 import com.binar.aplikasibinaerteama.ui.slider.SliderFragment
 import com.binar.aplikasibinaerteama.util.getNextIndex
 import com.binar.aplikasibinaerteama.util.getPreviousIndex
+import com.catnip.notepadku.di.ServiceLocator
 
 class OnboardingActivity : AppCompatActivity() {
+
+
+
+
+
     private val binding: ActivityOnboardingBinding by lazy {
         ActivityOnboardingBinding.inflate(layoutInflater)
     }
@@ -141,9 +147,10 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
     private fun navigateToMenuFragment(){
-
+        ServiceLocator.providePreferenceDataSource(this@OnboardingActivity).setSkipIntro(true)
         val i = Intent(this@OnboardingActivity, HomeActivity::class.java)
         startActivity(i)
+        finish()
     }
 
 

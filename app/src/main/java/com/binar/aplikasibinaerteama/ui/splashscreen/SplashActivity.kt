@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.appcompat.app.AppCompatActivity
 import com.binar.aplikasibinaerteama.databinding.ActivitySplashBinding
+import com.binar.aplikasibinaerteama.ui.main.HomeActivity
 import com.binar.aplikasibinaerteama.ui.onboarding.OnboardingActivity
+import com.catnip.notepadku.di.ServiceLocator
 
 
 class SplashActivity : AppCompatActivity() {
@@ -34,10 +36,18 @@ class SplashActivity : AppCompatActivity() {
         timer = object : CountDownTimer(3000, 1000) {
             override fun onTick(millisUntilFinished: Long) {}
             override fun onFinish() {
-                val intent = Intent(this@SplashActivity, OnboardingActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
-                finish()
+                if ( ServiceLocator.providePreferenceDataSource(this@SplashActivity).isSkipIntro()){
+                    val intent = Intent(this@SplashActivity, HomeActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
+                }else{
+                    val intent = Intent(this@SplashActivity, OnboardingActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
+                }
+
             }
         }
         timer?.start()
