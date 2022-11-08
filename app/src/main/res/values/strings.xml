@@ -75,5 +75,20 @@
     <string name="title_desc_menu1">Description about \nour project</string>
     <string name="title_menu2">Our Team</string>
     <string name="title_desc_menu2">Information about \nour team</string>
+    <string name="text_add_list">Add List</string>
+    <string name="text_empty_notes">You don\'t have any notes</string>
+    <string name="hint_field_body_notes">What\'s in your mind</string>
+    <string name="hint_field_title_notes">Note title</string>
+    <string name="text_hint_category">Note Category</string>
+    <string name="text_menu_save">Save</string>
+    <string name="text_menu_delete">Delete</string>
+    <string name="text_toolbar_edit">Edit Note</string>
+    <string name="text_toolbar_insert">Create New Group</string>
+    <string name="text_error_empty_title">Title notes cannot be empty</string>
+    <string name="text_error_empty_body">Body Notes cannot be empty</string>
+    <string name="text_error_empty_category">Category must be selected</string>
+    <string name="text_not_blank">Field can not be blank</string>
+    <string name="text_list">List</string>
+    <string name="text_lorem">Lorem ipsum dolor sit amet sed do eiusmod.</string>
 
 </resources>

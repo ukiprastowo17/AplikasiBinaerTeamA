@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.appcompat.app.AppCompatActivity
 import com.binar.aplikasibinaerteama.databinding.ActivitySplashBinding
+import com.binar.aplikasibinaerteama.di.ServiceLocator
 import com.binar.aplikasibinaerteama.ui.main.HomeActivity
+import com.binar.aplikasibinaerteama.ui.member.MemberFormActivity
 import com.binar.aplikasibinaerteama.ui.onboarding.OnboardingActivity
-import com.catnip.notepadku.di.ServiceLocator
+
 
 
 class SplashActivity : AppCompatActivity() {

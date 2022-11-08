@@ -7,13 +7,19 @@
         <entry key="app/src/main/res/drawable/background_home.xml" value="0.178" />
         <entry key="app/src/main/res/drawable/custombutton.xml" value="0.178" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.178" />
+        <entry key="app/src/main/res/drawable/ic_baseline_delete.xml" value="0.178" />
+        <entry key="app/src/main/res/drawable/ic_delete.xml" value="0.178" />
         <entry key="app/src/main/res/drawable/ic_ellipse_splash.xml" value="0.178" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.178" />
         <entry key="app/src/main/res/drawable/rounded_corner.xml" value="0.178" />
         <entry key="app/src/main/res/drawable/shape_background_rounded.xml" value="0.178" />
         <entry key="app/src/main/res/drawable/shape_circle.xml" value="0.178" />
         <entry key="app/src/main/res/layout/activity_about.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/activity_add_member_dialog.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/activity_dialog.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/activity_group_form.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/activity_member_form.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_menu_about.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_onboarding.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.28229166666666666" />
@@ -23,6 +29,8 @@
         <entry key="app/src/main/res/layout/deletename.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/deletepreset.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/fragment_slider.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/item_group_row.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/layout/item_member.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/item_profile_member.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/loadpreset.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/numberofteamsdialog.xml" value="0.28229166666666666" />
@@ -31,6 +39,7 @@
         <entry key="app/src/main/res/layout/savenewchangesdialog.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/teamrand.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/viewpreset.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/menu/menu_member_note.xml" value="0.28229166666666666" />
       </map>
     </option>
   </component>

@@ -4,10 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.binar.aplikasibinaerteama.LoadPreseActivity
-import com.binar.aplikasibinaerteama.TeamRandomizerActivity
 import com.binar.aplikasibinaerteama.databinding.ActivityHomeBinding
 import com.binar.aplikasibinaerteama.ui.about.MenuAboutActivity
+import com.binar.aplikasibinaerteama.ui.group.GroupFormActivity
 
 
 class HomeActivity : AppCompatActivity() {
@@ -27,16 +26,16 @@ class HomeActivity : AppCompatActivity() {
     private fun navigateToMenu() {
         with(binding) {
             cvMember.setOnClickListener {
-                val intent = Intent(this@HomeActivity, TeamRandomizerActivity::class.java)
+                val intent = Intent(this@HomeActivity, GroupFormActivity::class.java)
                 startActivity(intent)
                 Toast.makeText(this@HomeActivity, "Go To Member Activity", Toast.LENGTH_SHORT)
                     .show()
             }
             cvGroup.setOnClickListener {
-                val intent = Intent(this@HomeActivity, LoadPreseActivity::class.java)
-                startActivity(intent)
-                Toast.makeText(this@HomeActivity, "Go To Group Activity", Toast.LENGTH_SHORT)
-                    .show()
+//                val intent = Intent(this@HomeActivity, TeamRandomizerActivity::class.java)
+//                startActivity(intent)
+//                Toast.makeText(this@HomeActivity, "Go To Group Activity", Toast.LENGTH_SHORT)
+//                    .show()
             }
             cvHistory.setOnClickListener {
                 /*val intent = Intent(this@HomeActivity, HistoryActivity::class.java)

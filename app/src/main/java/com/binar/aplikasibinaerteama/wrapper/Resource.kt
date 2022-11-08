@@ -1,5 +1,7 @@
 package com.binar.aplikasibinaerteama.wrapper
 
+import com.binar.aplikasibinaerteama.data.room.entity.Member
+
 
 sealed class Resource<T>(val data: T? = null, val message: String? = null) {
     class Success<T>(data: T?) : Resource<T>(data)

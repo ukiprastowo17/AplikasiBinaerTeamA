@@ -9,17 +9,15 @@ import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.viewpager2.widget.ViewPager2
 import com.binar.aplikasibinaerteama.R
-import com.binar.aplikasibinaerteama.RandomizeActivity
-import com.binar.aplikasibinaerteama.TeamRandomizerActivity
 import com.binar.aplikasibinaerteama.adapter.ViewPagerAdapter
-import com.binar.aplikasibinaerteama.data.pref.PreferenceDataSourceImpl
 import com.binar.aplikasibinaerteama.databinding.ActivityOnboardingBinding
+import com.binar.aplikasibinaerteama.di.ServiceLocator
 import com.binar.aplikasibinaerteama.model.SliderData
 import com.binar.aplikasibinaerteama.ui.main.HomeActivity
 import com.binar.aplikasibinaerteama.ui.slider.SliderFragment
 import com.binar.aplikasibinaerteama.util.getNextIndex
 import com.binar.aplikasibinaerteama.util.getPreviousIndex
-import com.catnip.notepadku.di.ServiceLocator
+
 
 class OnboardingActivity : AppCompatActivity() {
 

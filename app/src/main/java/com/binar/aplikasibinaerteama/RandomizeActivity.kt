@@ -23,17 +23,19 @@ class RandomizeActivity : AppCompatActivity() {
 
 
     private val currentPreset: String? by lazy {
-        intent.getStringExtra("currentPreset")
+        intent.getStringExtra("name_group")
     }
 
     private val playerList: MutableList<String>? by lazy {
-        intent.getStringArrayListExtra("playerArrList")
+        intent.getStringArrayListExtra("data")
     }
+
+
+
 
     private val numberOfTeams: Int? by lazy {
         intent.getIntExtra("numberOfTeams", 2)
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +49,7 @@ class RandomizeActivity : AppCompatActivity() {
     private fun initializeViews() {
         binding.tvRandomizeCurrentPreset.text = currentPreset
         binding.tvRandomizeTotalPlayers.text = playerList?.size.toString()
+        Log.d("dataok", playerList.toString())
         binding.bRandomizeAgain.setOnClickListener(View.OnClickListener { startRandomizeThread() })
     }
 
@@ -65,6 +68,7 @@ class RandomizeActivity : AppCompatActivity() {
 
             val tvTeamNum = TextView(this)
             tvTeamNum.text = "TEAM-" + (i + 1).toString()
+            Log.d("datamasterteam",tvTeamNum.text.toString())
             tvTeamNum.setTypeface(null, Typeface.BOLD)
             tvTeamNum.setTextSize(
                 TypedValue.COMPLEX_UNIT_PX,
@@ -90,7 +94,8 @@ class RandomizeActivity : AppCompatActivity() {
         for (i in playerList!!.indices) {
             val playerName = playerList!![i]
             val tvName = TextView(this)
-            tvName.text = (playerNumCounter.toString() + ". " + playerName)
+            tvName.text = (playerNumCounter.toString() + ". " + playerName +"-"+ team.toString() )
+            Log.d("datamastermember",tvName.text.toString())
             tvName.setSingleLine()
             tvName.ellipsize = TextUtils.TruncateAt.END
             if (numberOfTeams!! > 3 && i == playerList!!.size - 1 && (team + 1) % 2.0f != 0f) {

@@ -97,6 +97,18 @@
             android:screenOrientation="portrait" >
         </activity>
 
+        <activity
+            android:name=".ui.member.MemberFormActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name=".ui.group.GroupFormActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+
     </application>
 
 </manifest>
