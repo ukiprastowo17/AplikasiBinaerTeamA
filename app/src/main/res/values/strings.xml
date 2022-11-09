@@ -8,7 +8,7 @@
     <string name="randomize">Randomize</string>
     <string name="preset_options">Preset Options</string>
 
-    <string name="current_preset">Preset:\u0020</string>
+    <string name="current_preset">Group Name:\u0020</string>
     <string name="current_preset2">Current Preset:\u0020</string>
     <string name="player_list"><u>List of Players</u></string>
     <string name="total_players">Total Players:\u0020</string>
@@ -75,7 +75,7 @@
     <string name="title_desc_menu1">Description about \nour project</string>
     <string name="title_menu2">Our Team</string>
     <string name="title_desc_menu2">Information about \nour team</string>
-    <string name="text_add_list">Add List</string>
+    <string name="text_add_list">Add Group</string>
     <string name="text_empty_notes">You don\'t have any notes</string>
     <string name="hint_field_body_notes">What\'s in your mind</string>
     <string name="hint_field_title_notes">Note title</string>
@@ -90,5 +90,9 @@
     <string name="text_not_blank">Field can not be blank</string>
     <string name="text_list">List</string>
     <string name="text_lorem">Lorem ipsum dolor sit amet sed do eiusmod.</string>
+    <string name="text_delete_list">Delete List</string>
+    <string name="text_delete_dialog">Delete</string>
+    <string name="text_yes_dialog">Yes</string>
+    <string name="text_no_dialog">No</string>
 
 </resources>

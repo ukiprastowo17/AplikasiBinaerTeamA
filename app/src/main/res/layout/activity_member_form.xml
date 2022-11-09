@@ -14,47 +14,116 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="100dp"
+    android:layout_marginBottom="130dp"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_title_notes"
-        style="@style/TextAppearance.MaterialComponents.Body1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Random" />
 
-    <EditText
-        android:id="@+id/edt_jumlah_tim"
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:background="#DCD5D5"
-        android:hint="Input Jumlah Tim"
-        android:inputType="number"
-        android:padding="14dp"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        />
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+            <TextView
+                android:id="@+id/tv_title1"
+                style="@style/TextTitle.Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_list" />
+
+            <TextView
+                android:id="@+id/tv_title2"
+                style="@style/TextTitle.Light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-25dp"
+                android:text="@string/text_member"
+                />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_desc_member"
+            style="@style/TextDesc.Light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_lorem"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title2" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+
+        <TextView
+            android:id="@+id/tvRandomizePresetLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5dp"
+            android:text="@string/current_preset"
+            android:textSize="@dimen/rtg_text_size" />
+
+        <TextView
+            android:id="@+id/tvRandomizeCurrentPreset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_toLeftOf="@+id/tvRandomizeTotalLabel"
+            android:layout_toRightOf="@+id/tvRandomizePresetLabel"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/none"
+            android:textSize="@dimen/rtg_text_size" />
+
+        <TextView
+            android:id="@+id/tvRandomizeTotalLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/tvRandomizeTotalPlayers"
+            android:text="@string/total_players"
+            android:textSize="@dimen/rtg_text_size"/>
+
+        <TextView
+            android:id="@+id/tvRandomizeTotalPlayers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:text="0"
+            android:textSize="@dimen/rtg_text_size"/>
+
+        <View
+            android:id="@+id/vRandomizeHorizontalDivider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/tvRandomizeCurrentPreset"
+            android:layout_marginTop="3dp"
+            android:background="@android:color/darker_gray" />
+    </RelativeLayout>
+
+
 
 
     <Button
-        android:id="@+id/btn_random"
-        style="@style/Button"
+        android:id="@+id/btn_add_mamber"
+        style="@style/Button2"
+        android:layout_margin="12dp"
+        android:layout_gravity="right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="30dp"
-        android:text="Random"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/edt_name_member_add"
-        app:layout_constraintTop_toBottomOf="@id/edt_name_member_add" />
-
+        android:text="Add Member"
+        android:textAllCaps="false" />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -91,19 +160,64 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/blue_1"
-        android:layout_margin="16dp"
-        app:tint="@color/white"
-        android:foregroundGravity="bottom"
-        app:fabSize="normal"
-        android:layout_gravity="bottom|center"
-        app:srcCompat="@drawable/ic_add"
+
+    <LinearLayout
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edt_jumlah_tim"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:background="#DCD5D5"
+                android:hint="Input Jumlah Tim"
+                android:inputType="number"
+                android:padding="14dp"
+                android:layout_margin="12dp"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                />
+
+
+            <Button
+                android:id="@+id/btn_random"
+                style="@style/Button2"
+                android:layout_margin="12dp"
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
+                android:layout_height="wrap_content"
+                android:text="Random"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+
+
+
+        <Button
+            android:id="@+id/btn_back"
+            style="@style/Button2"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_width="match_parent"
+            android:layout_weight="1.5"
+            android:layout_height="wrap_content"
+            android:text="Kembali"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

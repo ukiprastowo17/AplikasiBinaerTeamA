@@ -8,10 +8,8 @@ import com.binar.aplikasibinaerteama.data.repository.LocalRepository
 import com.binar.aplikasibinaerteama.data.repository.LocalRepositoryImpl
 import com.binar.aplikasibinaerteama.data.room.dao.GroupDao
 import com.binar.aplikasibinaerteama.data.room.dao.MemberDao
-import com.binar.aplikasibinaerteama.data.room.datasource.GroupDataSource
-import com.binar.aplikasibinaerteama.data.room.datasource.GroupDataSourceImpl
-import com.binar.aplikasibinaerteama.data.room.datasource.MemberDataSource
-import com.binar.aplikasibinaerteama.data.room.datasource.MemberDataSourceImpl
+import com.binar.aplikasibinaerteama.data.room.dao.ResultDao
+import com.binar.aplikasibinaerteama.data.room.datasource.*
 import com.catnip.notepadku.data.AppDatabase
 
 
@@ -34,7 +32,9 @@ object ServiceLocator {
         return provideAppDatabase(context).groupDao()
     }
 
-
+    fun provideResultDao(context: Context): ResultDao {
+        return provideAppDatabase(context).resultDao()
+    }
 
     fun provideMemberDataSource(context: Context): MemberDataSource {
         return MemberDataSourceImpl(provideMemberDao(context))
@@ -46,6 +46,10 @@ object ServiceLocator {
     }
 
 
+    fun provideResultDataSource(context: Context): ResultDataSource {
+        return ResultDataSourceImpl(provideResultDao(context))
+    }
+
 
     fun providePreferenceDataSource(context: Context): PreferenceDataSource {
         return PreferenceDataSourceImpl(provideUserPreference(context))
@@ -55,7 +59,8 @@ object ServiceLocator {
         return LocalRepositoryImpl(
             providePreferenceDataSource(context),
             provideMemberDataSource(context),
-            provideGroupDataSource(context)
+            provideGroupDataSource(context),
+            provideResultDataSource(context)
         )
     }
 

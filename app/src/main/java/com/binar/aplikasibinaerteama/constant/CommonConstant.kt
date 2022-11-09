@@ -29,6 +29,14 @@ object CommonConstant {
 
 
     const val DATABASE_TABLE_RESULT = "tb_result"
-    const val KEY_GROUP_NAME_resalt = "name_group"
-    const val KEY_ = "desc_group"
+    const val KEY_RESULT_ID = "id"
+    const val KEY_RESULT_NAME = "name_result"
+    const val KEY_RESULT_DATE = "date_result"
+    const val KEY_RESULT_MEMBER = "member_result"
+    const val KEY_RESULT_TEAMS = "teams_result"
+    const val KEY_RESULT_GROUP_NAME = "group_name_result"
+
+
+    const val GROUP_ID = "id_group"
+
 }

@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.binar.aplikasibinaerteama.data.room.entity.Member
 import com.binar.aplikasibinaerteama.databinding.ItemMemberBinding
+import com.binar.aplikasibinaerteama.model.ResultModel
 
 
-class MemberAdapter(private val itemClick: (Member) -> Unit) :
+class MemberAdapter( private val listener: OnCLickListenerMember) :
     RecyclerView.Adapter<MemberAdapter.MemberViewHolder>() {
 
-    var playersArrList: ArrayList<String>? = null
     private var items: MutableList<Member> = mutableListOf()
 
     fun setItems(items: List<Member>) {
@@ -21,7 +21,7 @@ class MemberAdapter(private val itemClick: (Member) -> Unit) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MemberViewHolder {
         val binding = ItemMemberBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MemberViewHolder(binding, itemClick)
+        return MemberViewHolder(binding, listener)
     }
 
     override fun onBindViewHolder(holder: MemberViewHolder, position: Int) {
@@ -31,7 +31,7 @@ class MemberAdapter(private val itemClick: (Member) -> Unit) :
     override fun getItemCount(): Int = items.size
 
 
-    class MemberViewHolder(private val binding: ItemMemberBinding, val itemClick: (Member) -> Unit) :
+    class MemberViewHolder(private val binding: ItemMemberBinding,  private val listener: OnCLickListenerMember) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bindView(item: Member) {
@@ -39,11 +39,15 @@ class MemberAdapter(private val itemClick: (Member) -> Unit) :
             binding.tvNameMember.text = item.nameMember
 
 
-            with(item) {
-                itemView.setOnClickListener { itemClick(this) }
+            binding.ivDeleteMember.setOnClickListener {
+                listener.onDeleteClickListenerMember(item)
             }
 
         }
     }
 
+
+    interface OnCLickListenerMember {
+        fun onDeleteClickListenerMember(member: Member)
+    }
 }

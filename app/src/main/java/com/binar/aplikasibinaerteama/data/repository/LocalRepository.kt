@@ -4,8 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import com.binar.aplikasibinaerteama.data.pref.PreferenceDataSource
 import com.binar.aplikasibinaerteama.data.room.datasource.GroupDataSource
 import com.binar.aplikasibinaerteama.data.room.datasource.MemberDataSource
+import com.binar.aplikasibinaerteama.data.room.datasource.ResultDataSource
 import com.binar.aplikasibinaerteama.data.room.entity.Group
 import com.binar.aplikasibinaerteama.data.room.entity.Member
+import com.binar.aplikasibinaerteama.data.room.entity.ResultData
+import com.binar.aplikasibinaerteama.model.ResultModel
 import com.binar.aplikasibinaerteama.wrapper.Resource
 
 
@@ -23,12 +26,20 @@ interface LocalRepository {
     suspend fun updateGroup(group: Group): Resource<Number>
     suspend fun insertGroup(group: Group): Resource<Number>
 
+
+    suspend fun getAllResult(): Resource<List<ResultModel>>
+    suspend fun getAllResultById(id : String): Resource<List<ResultData>>
+    suspend fun deleteResult(resultData: ResultData): Resource<Number>
+    suspend fun updateResult(resultData: ResultData): Resource<Number>
+    suspend fun insertResult(resultData: ResultData): Resource<Number>
+
 }
 
 class LocalRepositoryImpl(
     private val preferenceDataSource: PreferenceDataSource,
     private val memberDataSource: MemberDataSource,
     private val groupDataSource: GroupDataSource,
+    private val resultDataSource : ResultDataSource
 
     ) : LocalRepository {
     override suspend fun getAllMember(): Resource<List<Member>> {
@@ -75,6 +86,26 @@ class LocalRepositoryImpl(
 
     override suspend fun insertGroup(group: Group): Resource<Number> {
         return proceed { groupDataSource.insertGroup(group) }
+    }
+
+    override suspend fun getAllResult(): Resource<List<ResultModel>> {
+        return proceed { resultDataSource.getAllResult() }
+    }
+
+    override suspend fun getAllResultById(id: String): Resource<List<ResultData>> {
+        return proceed { resultDataSource.getAllResultById(id) }
+    }
+
+    override suspend fun deleteResult(resultData: ResultData): Resource<Number> {
+        return proceed { resultDataSource.deleteResult(resultData) }
+    }
+
+    override suspend fun updateResult(resultData: ResultData): Resource<Number> {
+        return proceed { resultDataSource.updateResult(resultData) }
+    }
+
+    override suspend fun insertResult(resultData: ResultData): Resource<Number> {
+        return proceed { resultDataSource.insertResult(resultData) }
     }
 
 

@@ -1,12 +1,10 @@
-package com.binar.aplikasibinaerteama
+package com.binar.aplikasibinaerteama.ui.random
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.text.Html
 import android.text.TextUtils
 import android.util.Log
 import android.util.TypedValue
-import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -15,12 +13,31 @@ import androidx.core.view.marginTop
 import com.binar.aplikasibinaerteama.databinding.RandomizeBinding
 import java.util.*
 import android.graphics.Typeface
+import com.binar.aplikasibinaerteama.R
+import com.binar.aplikasibinaerteama.base.GenericViewModelFactory
+import com.binar.aplikasibinaerteama.data.room.entity.Member
+import com.binar.aplikasibinaerteama.data.room.entity.ResultData
+import com.binar.aplikasibinaerteama.di.ServiceLocator
+import com.binar.aplikasibinaerteama.model.ResultModel
+import com.binar.aplikasibinaerteama.ui.member.MemberViewModel
+import java.text.SimpleDateFormat
+import kotlin.collections.ArrayList
 
 class RandomizeActivity : AppCompatActivity() {
     private val ERROR_TAG = "Randomize"
     private lateinit var binding: RandomizeBinding
     private var randomizeThread: Thread? = null
+    var playerNameData: String? = null
+    var dataTeam: String? = null
+    lateinit var currentDate : String
 
+    lateinit var dataArray : ArrayList<ResultData>
+
+    private val viewModel: ResultViewModel by lazy {
+        GenericViewModelFactory(ResultViewModel(ServiceLocator.provideLocalRepository(this))).create(
+            ResultViewModel::class.java
+        )
+    }
 
     private val currentPreset: String? by lazy {
         intent.getStringExtra("name_group")
@@ -47,15 +64,18 @@ class RandomizeActivity : AppCompatActivity() {
     }
 
     private fun initializeViews() {
+        val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+        currentDate = sdf.format(Date())
         binding.tvRandomizeCurrentPreset.text = currentPreset
         binding.tvRandomizeTotalPlayers.text = playerList?.size.toString()
         Log.d("dataok", playerList.toString())
-        binding.bRandomizeAgain.setOnClickListener(View.OnClickListener { startRandomizeThread() })
+        binding.btnBack.setOnClickListener(View.OnClickListener { finish()})
     }
 
     @SuppressLint("ResourceAsColor")
     private fun randomize() {
         var team = 0
+
         var playerNumCounter = 1
         val llTeam = numberOfTeams?.let { arrayOfNulls<LinearLayout>(it) }
 
@@ -63,7 +83,6 @@ class RandomizeActivity : AppCompatActivity() {
             llTeam!![i] = LinearLayout(this)
             llTeam[i]!!.id = i
             llTeam[i]!!.orientation = LinearLayout.VERTICAL
-            llTeam[i]!!.setBackgroundColor(R.color.purple_700)
             llTeam[i]!!.marginTop
 
             val tvTeamNum = TextView(this)
@@ -90,11 +109,27 @@ class RandomizeActivity : AppCompatActivity() {
         }
         team = 0
 
+
+
+
         playerList!!.shuffle()
         for (i in playerList!!.indices) {
-            val playerName = playerList!![i]
+            var playerName = playerList!![i]
             val tvName = TextView(this)
+
+            playerNameData = playerName.toString()
+            dataTeam = (team + 1).toString()
+
             tvName.text = (playerNumCounter.toString() + ". " + playerName +"-"+ team.toString() )
+
+                    val data = playerNameData?.let { ResultData(nameResult = currentDate.toString(), dateResult = currentDate.toString(), memberResult= it, teamResult=dataTeam.toString(), groupNameResult = currentPreset.toString()) }
+        if (data != null) {
+            viewModel.insertResult(data)
+        }
+
+
+
+
             Log.d("datamastermember",tvName.text.toString())
             tvName.setSingleLine()
             tvName.ellipsize = TextUtils.TruncateAt.END
@@ -109,36 +144,50 @@ class RandomizeActivity : AppCompatActivity() {
                 playerNumCounter++
             }
         }
+
+//        val data = playerNameData?.let { ResultData(nameResult = currentDate.toString(), dateResult = currentDate.toString(), memberResult= it, teamResult=dataTeam.toString(), groupNameResult = currentPreset.toString()) }
+//        if (data != null) {
+//            viewModel.insertResult(data)
+//        }
+
     }
 
 
     private fun startRandomizeThread() {
-        binding.bRandomizeAgain.visibility = View.INVISIBLE
-        randomizeThread = Thread {
-            synchronized(this@RandomizeActivity) {
-                try {
-                    val rand = Random()
-                    for (i in 0 until rand.nextInt(3) + 5) {
-                        if (i != 0) {
-                            Thread.sleep(330)
-                        }
+//        binding.bRandomizeAgain.visibility = View.INVISIBLE
+        randomize()
 
-                        this@RandomizeActivity.runOnUiThread(Runnable {
-                            binding.llTeamLeft.removeAllViews()
-                            randomize()
-                        })
-                    }
-                } catch (e: InterruptedException) {
-                    Log.e(ERROR_TAG, e.message!!)
-                    Log.e(ERROR_TAG, Log.getStackTraceString(e))
-                } finally {
-                    binding.bRandomizeAgain.post(Runnable {
-                        binding.bRandomizeAgain.visibility = View.VISIBLE
-                    })
-                }
-            }
-        }
-        randomizeThread!!.start()
+//        randomizeThread = Thread {
+//            synchronized(this@RandomizeActivity) {
+//                try {
+//                    val rand = Random()
+//                    for (i in 0 until rand.nextInt(3) + 5) {
+//                        if (i != 0) {
+//                            Thread.sleep(330)
+//                        }
+//
+//                        this@RandomizeActivity.runOnUiThread(Runnable {
+//                            binding.llTeamLeft.removeAllViews()
+//                            randomize()
+//
+//                        })
+//                    }
+//                } catch (e: InterruptedException) {
+//                    Log.e(ERROR_TAG, e.message!!)
+//                    Log.e(ERROR_TAG, Log.getStackTraceString(e))
+//                } finally {
+//                    binding.bRandomizeAgain.post(Runnable {
+//
+//
+//
+//
+//
+//                        binding.bRandomizeAgain.visibility = View.VISIBLE
+//                    })
+//                }
+//            }
+//        }
+//        randomizeThread!!.start()
     }
 
     override fun onStop() {

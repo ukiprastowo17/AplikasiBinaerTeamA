@@ -8,8 +8,10 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.binar.aplikasibinaerteama.constant.CommonConstant
 import com.binar.aplikasibinaerteama.data.room.dao.GroupDao
 import com.binar.aplikasibinaerteama.data.room.dao.MemberDao
+import com.binar.aplikasibinaerteama.data.room.dao.ResultDao
 import com.binar.aplikasibinaerteama.data.room.entity.Group
 import com.binar.aplikasibinaerteama.data.room.entity.Member
+import com.binar.aplikasibinaerteama.data.room.entity.ResultData
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,10 +19,11 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 
-@Database(entities = [Member::class, Group::class], version = 3, exportSchema = true)
+@Database(entities = [Member::class, Group::class, ResultData::class], version = 4, exportSchema = true)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun memberDao(): MemberDao
     abstract fun groupDao(): GroupDao
+    abstract fun resultDao(): ResultDao
 
 
     companion object {

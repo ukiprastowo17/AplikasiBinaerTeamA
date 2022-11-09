@@ -1,15 +1,20 @@
 package com.binar.aplikasibinaerteama.ui.group.adapter;
 
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.binar.aplikasibinaerteama.constant.CommonConstant
 import com.binar.aplikasibinaerteama.data.room.entity.Group
 import com.binar.aplikasibinaerteama.data.room.entity.Member
 import com.binar.aplikasibinaerteama.databinding.ItemGroupRowBinding
 import com.binar.aplikasibinaerteama.databinding.ItemMemberBinding
+import com.binar.aplikasibinaerteama.ui.member.MemberFormActivity
 
 
-class GroupAdapter(private val itemClick: (Group) -> Unit) :
+class GroupAdapter(private val listener:OnCLickListener) :
     RecyclerView.Adapter<GroupAdapter.GroupViewHolder>() {
 
 
@@ -23,7 +28,7 @@ class GroupAdapter(private val itemClick: (Group) -> Unit) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupViewHolder {
         val binding = ItemGroupRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return GroupViewHolder(binding, itemClick)
+        return GroupViewHolder(binding, listener)
     }
 
     override fun onBindViewHolder(holder: GroupViewHolder, position: Int) {
@@ -33,34 +38,40 @@ class GroupAdapter(private val itemClick: (Group) -> Unit) :
     override fun getItemCount(): Int = items.size
 
 
-    class GroupViewHolder(private val binding: ItemGroupRowBinding, val itemClick: (Group) -> Unit) :
+    class GroupViewHolder(private val binding: ItemGroupRowBinding,
+    private val listener: OnCLickListener) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bindView(item: Group) {
             binding.tvTitleList.text = item.name_group
             binding.tvDescList.text = item.desc_group
 
-
-            with(item) {
-                binding.btnAddMemberList .setOnClickListener {
-
-                    itemClick(this)
-
-
+            binding.btnAddMemberList.setOnClickListener {
+                val bundle = Bundle().apply {
+                    putString(CommonConstant.GROUP_ID, item.id.toString())
+                    putString(CommonConstant.KEY_GROUP_NAME, item.name_group.toString())
                 }
+                val intent = Intent(it.context, MemberFormActivity::class.java)
+                intent.putExtras(bundle)
+                it.context.startActivity(intent)
+            }
 
-                binding.btnDeleteMemberList .setOnClickListener {
+            binding.btnDeleteMemberList.setOnClickListener {
+                listener.onDeleteClickListener(item)
+            }
 
-                    itemClick(this)
 
-
-                }
             }
 
         }
 
+    interface OnCLickListener {
+        fun onDeleteClickListener(group: Group)
+    }
 
     }
 
-}
+
+
+
 

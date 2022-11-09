@@ -1,147 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+
+
 
 
 
     <LinearLayout
-        android:id="@+id/tv_txt1"
-        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="130dp"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:text="List"
-            style="@style/TextTitle.Bold"/>
 
 
-        <TextView
-            android:id="@+id/tv_txt2"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="Member"
-            style="@style/TextTitle.Light"/>
-    </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvRandomizePresetLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_txt1"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="5dp"
-        android:text="@string/current_preset"
-        android:textSize="@dimen/rtg_text_size" />
-
-    <TextView
-        android:id="@+id/tvRandomizeCurrentPreset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_txt1"
-        android:layout_toLeftOf="@+id/tvRandomizeTotalLabel"
-        android:layout_toRightOf="@+id/tvRandomizePresetLabel"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:text="@string/none"
-        android:textSize="@dimen/rtg_text_size"/>
-
-    <TextView
-        android:id="@+id/tvRandomizeTotalLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_txt1"
-        android:layout_toLeftOf="@+id/tvRandomizeTotalPlayers"
-        android:text="@string/total_players"
-        android:textSize="@dimen/rtg_text_size"/>
-
-    <TextView
-        android:id="@+id/tvRandomizeTotalPlayers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/tv_txt1"
-        android:layout_marginRight="5dp"
-        android:text="0"
-        android:textSize="@dimen/rtg_text_size"/>
-
-    <View
-        android:id="@+id/vRandomizeHorizontalDivider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/tvRandomizeCurrentPreset"
-        android:layout_marginTop="3dp"
-        android:background="@android:color/darker_gray" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/bottom_divider"
-        android:layout_below="@+id/vRandomizeHorizontalDivider"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:orientation="horizontal">
-
-        <ScrollView
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1">
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            tools:ignore="MissingConstraints">
 
             <LinearLayout
-                android:id="@+id/llTeamLeft"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"></LinearLayout>
-        </ScrollView>
+                android:orientation="vertical"
+                tools:ignore="MissingConstraints">
+                <TextView
+                    android:id="@+id/tv_title1"
+                    style="@style/TextTitle.Bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_list" />
+
+                <TextView
+                    android:id="@+id/tv_title2"
+                    style="@style/TextTitle.Light"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-25dp"
+                    android:text="@string/text_member"
+                    />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_desc_member"
+                style="@style/TextDesc.Light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_lorem"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title2" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+
+            <TextView
+                android:id="@+id/tvRandomizePresetLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="5dp"
+                android:text="@string/current_preset"
+                android:textSize="@dimen/rtg_text_size" />
+
+            <TextView
+                android:id="@+id/tvRandomizeCurrentPreset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_toLeftOf="@+id/tvRandomizeTotalLabel"
+                android:layout_toRightOf="@+id/tvRandomizePresetLabel"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@string/none"
+                android:textSize="@dimen/rtg_text_size" />
+
+            <TextView
+                android:id="@+id/tvRandomizeTotalLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/tvRandomizeTotalPlayers"
+                android:text="@string/total_players"
+                android:textSize="@dimen/rtg_text_size"/>
+
+            <TextView
+                android:id="@+id/tvRandomizeTotalPlayers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:text="0"
+                android:textSize="@dimen/rtg_text_size"/>
+
+            <View
+                android:id="@+id/vRandomizeHorizontalDivider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/tvRandomizeCurrentPreset"
+                android:layout_marginTop="3dp"
+                android:background="@android:color/darker_gray" />
+        </RelativeLayout>
+
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bottom_divider"
+            android:layout_below="@+id/vRandomizeHorizontalDivider"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal">
+
+            <ScrollView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:id="@+id/llTeamLeft"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"></LinearLayout>
+            </ScrollView>
+
+
+        </LinearLayout>
 
 
     </LinearLayout>
 
-    <View
-        android:id="@+id/bottom_divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        android:layout_above="@+id/llRandomizeAgain"
-        android:layout_marginBottom="10dp"/>
+
+
+
+
+
+
+
+
 
     <LinearLayout
-        android:id="@+id/llRandomizeAgain"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/rtg_button_margin_bottom"
-        android:orientation="horizontal"
-        android:weightSum="10" >
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="2.68" />
+
+
+
 
         <Button
-            android:id="@+id/bRandomizeAgain"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="4.74"
-            android:background="@drawable/custombutton"
-            android:text="@string/randomize_again"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/rtg_button_text_size"/>
+            android:id="@+id/btn_back"
+            style="@style/Button2"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_width="match_parent"
+            android:layout_weight="1.5"
+            android:layout_height="wrap_content"
+            android:text="Kembali"
+            android:textAllCaps="false" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="2.68" />
     </LinearLayout>
 
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+

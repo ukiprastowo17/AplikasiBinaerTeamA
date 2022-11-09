@@ -1,4 +1,4 @@
-package com.binar.aplikasibinaerteama.ui.member
+package com.binar.aplikasibinaerteama.ui.history
 
 import android.content.Context
 import android.content.Intent
@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import com.binar.aplikasibinaerteama.R
 import com.binar.aplikasibinaerteama.ui.random.RandomizeActivity
@@ -14,20 +13,24 @@ import com.binar.aplikasibinaerteama.base.BaseActivity
 import com.binar.aplikasibinaerteama.base.GenericViewModelFactory
 import com.binar.aplikasibinaerteama.constant.CommonConstant
 import com.binar.aplikasibinaerteama.data.room.entity.Member
+import com.binar.aplikasibinaerteama.databinding.ActivityHistoryFormBinding
 import com.binar.aplikasibinaerteama.databinding.ActivityMemberFormBinding
 import com.binar.aplikasibinaerteama.di.ServiceLocator
 import com.binar.aplikasibinaerteama.dialogs.AddMemberDialog
+import com.binar.aplikasibinaerteama.model.ResultModel
+import com.binar.aplikasibinaerteama.ui.history.adapter.HistoryAdapter
 import com.binar.aplikasibinaerteama.ui.member.adapter.MemberAdapter
 import com.binar.aplikasibinaerteama.wrapper.Resource
 
 
-class MemberFormActivity : BaseActivity<ActivityMemberFormBinding>(ActivityMemberFormBinding::inflate) , AddMemberDialog.DialogListener, MemberAdapter.OnCLickListenerMember {
+class HistoryFormActivity : BaseActivity<ActivityHistoryFormBinding>(ActivityHistoryFormBinding::inflate) , AddMemberDialog.DialogListener {
 
-    private val viewModel: MemberViewModel by lazy {
-        GenericViewModelFactory(MemberViewModel(ServiceLocator.provideLocalRepository(this))).create(
-            MemberViewModel::class.java
+    private val viewModel: HistoryViewModel by lazy {
+        GenericViewModelFactory(HistoryViewModel(ServiceLocator.provideLocalRepository(this))).create(
+            HistoryViewModel::class.java
         )
     }
+
 
     var playersArrList: ArrayList<String>? = null
 
@@ -39,7 +42,15 @@ class MemberFormActivity : BaseActivity<ActivityMemberFormBinding>(ActivityMembe
         intent.getStringExtra("id_group")
     }
 
-    private lateinit var adapter: MemberAdapter
+    private val adapter: HistoryAdapter by lazy {
+        HistoryAdapter {
+            val intent = Intent(this@HistoryFormActivity, HistoryDetailFormActivity::class.java)
+            intent.putExtra("name_result", it.name_result.toString())
+            startActivity(intent)
+            Toast.makeText(this@HistoryFormActivity, "Go To About Activity", Toast.LENGTH_SHORT)
+                .show()
+        }
+    }
 
 
 
@@ -52,41 +63,25 @@ class MemberFormActivity : BaseActivity<ActivityMemberFormBinding>(ActivityMembe
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
         observeData()
-        adapter = MemberAdapter(this)
         playersArrList = ArrayList()
         initRecyclerView()
         initData()
-        binding.btnRandom.visibility = View.GONE
-        binding.btnAddMamber.setOnClickListener {
-            AddMemberDialog().show(supportFragmentManager, "List member")
-        }
 
 
-        binding.btnRandom.setOnClickListener {
-            val intent = Intent(this@MemberFormActivity, RandomizeActivity::class.java)
-            intent.putExtra("id_group", idGroup)
-            intent.putExtra("name_group", nameGroup)
-            intent.putExtra("numberOfTeams", Integer.parseInt(binding.edtJumlahTim.text.toString()))
-            intent.putStringArrayListExtra("data", playersArrList)
-            startActivity(intent)
-            Toast.makeText(this@MemberFormActivity, "Go To About Activity", Toast.LENGTH_SHORT)
-                .show()
-        }
 
 
     }
 
     private fun initData() {
-        binding.tvRandomizeCurrentPreset.text = nameGroup
 
         Log.d("datagroup",idGroup.toString())
-        idGroup?.let { viewModel.getAllGroupByGroup(it) }
+       viewModel.getAllResult()
     }
 
 
 
     private fun observeData() {
-        viewModel.initialDataResult.observe(this) {
+        viewModel.initialDataResultHistory.observe(this) {
             when (it) {
                 is Resource.Error -> {
                     showError(it.message)
@@ -97,13 +92,7 @@ class MemberFormActivity : BaseActivity<ActivityMemberFormBinding>(ActivityMembe
                 is Resource.Success -> {
                     showData(it.data)
 
-                    playersArrList!!.clear()
-                    it.data?.forEach {
-                        playersArrList!!.add(it.nameMember)
-                    }
-                    binding.btnRandom.visibility = View.VISIBLE
-                    binding.tvRandomizeTotalPlayers.text = playersArrList?.size.toString()
-                    Log.d("datakonver", playersArrList.toString())
+
 
 
 
@@ -142,11 +131,13 @@ class MemberFormActivity : BaseActivity<ActivityMemberFormBinding>(ActivityMembe
                 is Resource.Success -> {
                     setFormEnabled(true)
                     binding.pbForm.isVisible = false
+                    finish()
                     Toast.makeText(this, "Update data Success", Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Error -> {
                     setFormEnabled(true)
                     binding.pbForm.isVisible = false
+                    finish()
                     Toast.makeText(this, "Error when update data", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -160,12 +151,13 @@ class MemberFormActivity : BaseActivity<ActivityMemberFormBinding>(ActivityMembe
                 is Resource.Success -> {
                     setFormEnabled(true)
                     binding.pbForm.isVisible = false
-                    idGroup?.let { viewModel.getAllGroupByGroup(it) }
+                    finish()
                     Toast.makeText(this, "Delete data Success", Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Error -> {
                     setFormEnabled(true)
                     binding.pbForm.isVisible = false
+                    finish()
                     Toast.makeText(this, "Error when delete data", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -203,21 +195,9 @@ class MemberFormActivity : BaseActivity<ActivityMemberFormBinding>(ActivityMembe
         return true
     }
 
-    private fun saveNote() {
-        if (checkFormValidation()) {
-            if (isEditAction()) {
-                viewModel.updateMember(parseFormIntoEntity())
-            } else {
-                viewModel.insertMember(parseFormIntoEntity())
-            }
-        }
-    }
 
-    private fun deleteNote() {
-        if (isEditAction()) {
-            viewModel.deleteMember(parseFormIntoEntity())
-        }
-    }
+
+
 
     private fun parseFormIntoEntity(): Member {
         return idGroup?.let {
@@ -246,7 +226,7 @@ class MemberFormActivity : BaseActivity<ActivityMemberFormBinding>(ActivityMembe
     }
 
 
-    private fun showData(data: List<Member>?) {
+    private fun showData(data: List<ResultModel>?) {
 
 
 
@@ -289,12 +269,12 @@ class MemberFormActivity : BaseActivity<ActivityMemberFormBinding>(ActivityMembe
     }
 
     private fun initRecyclerView() {
-        binding.rvNotes.adapter = this@MemberFormActivity.adapter
+        binding.rvNotes.adapter = this@HistoryFormActivity.adapter
     }
 
     companion object {
         fun startActivity(context: Context, id: Int? = null) {
-            context.startActivity(Intent(context, MemberFormActivity::class.java).apply {
+            context.startActivity(Intent(context, HistoryFormActivity::class.java).apply {
                 id?.let {
                     putExtra(CommonConstant.EXTRAS_ID_NOTE, id)
                 }
@@ -304,28 +284,8 @@ class MemberFormActivity : BaseActivity<ActivityMemberFormBinding>(ActivityMembe
 
     override fun processDialog(memberName: String) {
             val data = Member(idGroup = idGroup.toString(), nameMember = memberName)
-            viewModel.insertMember(data)
+//            viewModel.insertMember(data)
 
-    }
-
-    override fun onDeleteClickListenerMember(member: Member) {
-        AlertDialog.Builder(this)
-            .setTitle(getString(R.string.text_delete_dialog))
-            .setMessage("Are you sure want to delete ${member.nameMember} ?")
-            .setPositiveButton(getString(R.string.text_yes_dialog)) { dialog, _ ->
-                viewModel.deleteMember(member)
-                Toast.makeText(
-                    this,
-                    "${member.nameMember} Successfully Deleted",
-                    Toast.LENGTH_SHORT
-                ).show()
-                dialog.dismiss()
-            }
-            .setNegativeButton(getString(R.string.text_no_dialog)) { dialog, _ ->
-                dialog.dismiss()
-            }
-            .create()
-            .show()
     }
 }
 

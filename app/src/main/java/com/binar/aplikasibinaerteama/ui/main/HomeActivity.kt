@@ -7,6 +7,7 @@ import android.widget.Toast
 import com.binar.aplikasibinaerteama.databinding.ActivityHomeBinding
 import com.binar.aplikasibinaerteama.ui.about.MenuAboutActivity
 import com.binar.aplikasibinaerteama.ui.group.GroupFormActivity
+import com.binar.aplikasibinaerteama.ui.history.HistoryFormActivity
 
 
 class HomeActivity : AppCompatActivity() {
@@ -31,15 +32,9 @@ class HomeActivity : AppCompatActivity() {
                 Toast.makeText(this@HomeActivity, "Go To Member Activity", Toast.LENGTH_SHORT)
                     .show()
             }
-            cvGroup.setOnClickListener {
-//                val intent = Intent(this@HomeActivity, TeamRandomizerActivity::class.java)
-//                startActivity(intent)
-//                Toast.makeText(this@HomeActivity, "Go To Group Activity", Toast.LENGTH_SHORT)
-//                    .show()
-            }
             cvHistory.setOnClickListener {
-                /*val intent = Intent(this@HomeActivity, HistoryActivity::class.java)
-                startActivity(intent)*/
+                val intent = Intent(this@HomeActivity, HistoryFormActivity::class.java)
+                startActivity(intent)
                 Toast.makeText(this@HomeActivity, "Go To History Activity", Toast.LENGTH_SHORT)
                     .show()
             }

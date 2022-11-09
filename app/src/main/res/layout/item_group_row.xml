@@ -9,18 +9,10 @@
     android:backgroundTint="@color/blue_2"
     app:cardCornerRadius="15dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp">
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
-
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
         <TextView
             android:id="@+id/tv_title_list"
             android:layout_width="wrap_content"
@@ -30,8 +22,6 @@
             android:fontFamily="@font/poppins_semibold"
             android:textColor="@color/blue_1"
             android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             tools:text="Group Name" />
 
         <TextView
@@ -39,66 +29,46 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="-4dp"
+            android:layout_marginStart="24dp"
             android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@id/tv_title_list"
-            app:layout_constraintTop_toBottomOf="@id/tv_title_list"
             tools:text="Deskripsi Group" />
 
-        <TextView
-            android:id="@+id/tv_member_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:text="Member: "
-            android:textColor="@color/black_1"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/tv_title_list"
-            app:layout_constraintTop_toBottomOf="@id/tv_desc_list" />
-
-        <TextView
-            android:id="@+id/tv_count_member_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black_1"
-            android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@id/tv_member_list"
-            app:layout_constraintTop_toTopOf="@id/tv_member_list"
-            tools:text="12" />
-
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:padding="@dimen/_16sdp"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
         <Button
+
             android:id="@+id/btn_add_member_list"
             style="@style/ButtonDialog"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="2"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="5dp"
+            android:layout_margin="5dp"
             android:text="Add Member"
-            android:textAllCaps="false"
-            app:layout_constraintBottom_toTopOf="@id/btn_delete_member_list"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guideline"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/btn_delete_member_list"
             style="@style/ButtonDialog"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="2"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="20dp"
-            android:paddingHorizontal="23dp"
-            android:text="Delete List"
+            android:layout_margin="5dp"
+            android:text="Delete Group"
             android:textAllCaps="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/btn_add_member_list"
-            app:layout_constraintStart_toStartOf="@id/btn_add_member_list"
-            app:layout_constraintTop_toBottomOf="@id/btn_add_member_list" />
+     />
+    </LinearLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+
+
+
+
+
 
 
 </androidx.cardview.widget.CardView>
